@@ -86,9 +86,12 @@ def main() -> int:
     try:
         authors = fetch_authors()
         old = load_authors()
-        new = authors if old is None else [author for author in authors if author not in set(old)]
+        old_set = set(old or [])
+        authors_set = set(authors)
+        added = authors if old is None else [author for author in authors if author not in old_set]
+        removed = [] if old is None else [author for author in old if author not in authors_set]
         save_authors(authors)
-        print(json.dumps(new, ensure_ascii=False))
+        print(json.dumps({"added": added, "removed": removed}, ensure_ascii=False))
         return 0
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)

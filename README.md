@@ -3,13 +3,14 @@
 Small tracker for `https://celsius232.es/autores-celsius/`.
 
 This exists because the Celsius RSS feed appears to be empty, so this gives a
-simple way to detect which authors are new.
+simple way to detect which authors have been added or removed.
 
 `track.py` fetches the page, compares the current author list with `authors.json`,
-updates `authors.json`, and prints new authors as a JSON array.
+updates `authors.json`, and prints added and removed authors as a JSON object.
 
-`notify.sh` runs `track.py` and sends an Apprise notification only when new
-authors exist. The notification is sent to the `celsius` Apprise tag.
+`notify.sh` runs `track.py` and sends an Apprise notification only when authors
+have been added or removed. The notification is sent to the `celsius` Apprise
+tag.
 
 ## Requirements
 
